@@ -4,6 +4,7 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using static Lab3CSharp.Program;
 
 
 namespace Lab3CSharp
@@ -106,24 +107,77 @@ namespace Lab3CSharp
             }
            
         }
-        class Administration { 
-        
-        }
-        class Engineer
-        {
 
-        }
-        class HumanResources
-        {
-
-        }
         class Worker
         {
+            protected string Name;
+            protected string Surname;
+            protected int Age;
+            public Worker(string name, string surname, int age)
+            {
+                Name = name;
+                Surname = surname;
+                Age = age;
+            }
+            public virtual void Show()
+            {
+                Console.WriteLine($"Name: {Name}, Surname: {Surname}, Age: {Age}");
+            }
+        }
+       
+        class Engineer : Worker
+        {
+            public Engineer(string name, string surname, int age, string specialization, double salary) : base(name, surname, age) {
+                Specialization = specialization;
+                Salary = salary;
+            }
+            public string Specialization;
+            public double Salary;
 
+              public override void Show()
+            {
+                base.Show();
+                Console.WriteLine($"Specialization: {Specialization}, Salary: {Salary}");
+            }
+        }
+        class HumanResources : Worker 
+        {
+            public HumanResources(string name, string surname, int age, string role) : base(name, surname, age) {
+                Role = role;
+            }
+            public string Role;
+            public override void Show()
+            {
+                base.Show();
+                Console.WriteLine($"Role: {Role}");
+            }
+        }
+        class Administration : HumanResources
+        { 
+            public Administration(string name, string surname, int age, string role, string department) : base(name, surname, age, role) {
+                Department = department;
+            }
+            public string Department;
+            public override void Show()
+            {
+                base.Show();
+                Console.WriteLine($"Department: {Department}");
+            }
         }
         static void task2()
         {
             Console.WriteLine("Task 2");
+            List<Worker> workers = new List<Worker>();
+            workers.Add(new Worker("John", "Doe", 35));
+            workers.Add(new Engineer("Jane", "Smith", 28, "Software Engineering", 50000));
+            workers.Add(new HumanResources("Mike", "Johnson", 40, "Recruiter"));
+            workers.Add(new Administration("Emily", "Williams", 32, "Manager", "HR"));
+
+            foreach (var worker in workers)
+            {
+                worker.Show();
+                Console.WriteLine(); 
+            }
 
         }
     }
