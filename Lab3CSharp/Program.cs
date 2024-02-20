@@ -48,15 +48,15 @@ namespace Lab3CSharp
         {
             protected int a, b;
             protected int c;
-            public ITriangle (int sideBase, int side, int color)
+            public ITriangle (int Base, int side, int color)
             {
-                a = sideBase;
+                a = Base;
                 b = side;
                 c = color;
             }
 
             public void Print () {
-                Console.WriteLine($"sideBase: {a}");
+                Console.WriteLine($"Base: {a}");
                 Console.WriteLine($"side: {b}");
             }
             public float P () {
@@ -74,16 +74,37 @@ namespace Lab3CSharp
                 return a == b;
             }
 
+            public int Side {
+                get { return b; } set { b = value; }
+            }
+            public int Base
+            {
+                get { return a; }
+                set { a = value; }
+            }
+
+            public int Color
+            {
+                get { return c; }
+            }
         }
             static void task1()
         {
             Console.WriteLine("Task 1");
-
-            var triangle = new ITriangle(3, 5, 6);
-            triangle.Print();
-            Console.WriteLine(triangle.P());
-            Console.WriteLine(triangle.S());
-            Console.WriteLine(triangle.EquilateralTriangle());
+            List < ITriangle >  triangles = new List<ITriangle>();
+            triangles.Add(new ITriangle(3, 5, 6));
+            triangles.Add(new ITriangle(4, 4, 10));
+            triangles.Add(new ITriangle(2, 7, 9));
+            triangles.Add(new ITriangle(8, 8, 1));
+            triangles.Add(new ITriangle(1, 5, 4));
+            foreach(var t in triangles) {
+                Console.WriteLine();
+                t.Print();
+                Console.WriteLine($"P = {t.P()}");
+                Console.WriteLine($"S = {t.S()}");
+                Console.WriteLine($"Equilateral triangle? = {t.EquilateralTriangle()}");
+            }
+           
         }
         class Administration { 
         
