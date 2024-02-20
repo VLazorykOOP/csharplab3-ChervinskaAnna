@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
+
 
 namespace Lab3CSharp
 {
@@ -41,10 +44,60 @@ namespace Lab3CSharp
             }
         }
 
+        public class ITriangle
+        {
+            protected int a, b;
+            protected int c;
+            public ITriangle (int sideBase, int side, int color)
+            {
+                a = sideBase;
+                b = side;
+                c = color;
+            }
 
-        static void task1()
+            public void Print () {
+                Console.WriteLine($"sideBase: {a}");
+                Console.WriteLine($"side: {b}");
+            }
+            public float P () {
+                 return a + b * 2;
+            }
+
+            public float S ()
+            {
+                double p = P() / 2.0;
+                return (float)Math.Sqrt(p * (p - a) * (p - a) * (p - b));
+            }
+
+            public bool EquilateralTriangle()
+            {
+                return a == b;
+            }
+
+        }
+            static void task1()
         {
             Console.WriteLine("Task 1");
+
+            var triangle = new ITriangle(3, 5, 6);
+            triangle.Print();
+            Console.WriteLine(triangle.P());
+            Console.WriteLine(triangle.S());
+            Console.WriteLine(triangle.EquilateralTriangle());
+        }
+        class Administration { 
+        
+        }
+        class Engineer
+        {
+
+        }
+        class HumanResources
+        {
+
+        }
+        class Worker
+        {
 
         }
         static void task2()
